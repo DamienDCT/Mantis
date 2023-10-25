@@ -1,2 +1,2 @@
-# Mantis_Scripts
+# Mantis
  Scripts C# du projet Mantis
