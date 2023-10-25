@@ -14,8 +14,14 @@ public class VisualUpdater : NetworkBehaviour
     private void Awake()
     {
         copyClipboardBtn.onClick.AddListener(() => {
-            GUIUtility.systemCopyBuffer = NetworkManagerUI.Instance?.GetJoinCode();
+            CopyClipboard();
         });
+    }
+
+    private void CopyClipboard()
+    {
+        AudioManager.Instance?.Play("UIClick");
+        GUIUtility.systemCopyBuffer = NetworkManagerUI.Instance?.GetJoinCode();
     }
 
     private void Start()

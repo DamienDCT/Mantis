@@ -18,22 +18,23 @@ public class HostDisconnectedUI : MonoBehaviour
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectedCallback;
 
         playAgainBtn.onClick.AddListener(() => {
-            NetworkManager.Singleton.Shutdown();
-            Loader.Load(Loader.Scene.InitializeScene);
+            PlayAgain();
         });
 
         Hide();
     }
 
-
+    private void PlayAgain()
+    {
+        AudioManager.Instance?.Play("UIClick");
+        NetworkManager.Singleton.Shutdown();
+        Loader.Load(Loader.Scene.InitializeScene);
+    }
 
     private void NetworkManager_OnClientDisconnectedCallback(ulong clientId)
     {
         if(clientId == NetworkManager.ServerClientId)
         {            
-            // try{
-            //     NetworkManagerUI.Instance.playerDataNetworkList.Clear();
-            // } catch(NullReferenceException nfe) { }
             Show();
         }
     }

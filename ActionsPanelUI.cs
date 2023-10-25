@@ -36,6 +36,7 @@ public class  ActionsPanelUI : NetworkBehaviour
 
     private void Score()
     {
+        AudioManager.Instance?.Play("UIClick");
         Card card = Deck.Instance.GetLastCard();
         if(currentPlayer.GetHand().HasCardColor(card.colorCard))
         {
@@ -121,12 +122,14 @@ public class  ActionsPanelUI : NetworkBehaviour
         if(IsHost)
         {
             MantisGameMultiplayer.Instance.ScoreServerRpc(player.GetPlayerId(), amountPoints);
+            yield return new WaitForSecondsRealtime(1.5f);
             TurnSystem.Instance.NextPlayerServerRpc();
         }
     }
 
     public void StealPlayer(ulong playerId)
     {
+        AudioManager.Instance?.Play("UIClick");
         Card card = Deck.Instance.GetLastCard();
         Player stolenPlayer = MantisGameMultiplayer.Instance.FindPlayerWithPlayerId(playerId);
         if(stolenPlayer.GetHand().HasCardColor(card.colorCard))

@@ -48,7 +48,8 @@ public class CardHolderAnimation : MonoBehaviour
 
     private IEnumerator ExitCardFromDeckAnimation(Vector3 positionPlayer){
         _timer = 0f;
-        Debug.Log("coucou in first coroutine");
+
+        AudioManager.Instance?.Play("deckCardOut");  
         while(_timer < animationDuration)
         {
             float lerpRatio = _timer / animationDuration;
@@ -57,7 +58,10 @@ public class CardHolderAnimation : MonoBehaviour
             transform.rotation = Quaternion.Euler(Vector3.Lerp(defaultRotation, new Vector3(0f, 0f, 0f), lerpRatio));
 
             if(_timer > (animationDuration / 2))
+            {
                 GetComponent<SpriteRenderer>().sortingOrder = 2;   
+            }
+
             _timer += Time.deltaTime;
             yield return null;
         }
@@ -68,6 +72,7 @@ public class CardHolderAnimation : MonoBehaviour
     private IEnumerator TransitToHandDeck(Vector3 positionPlayer){
         _timer = 0f;
         Vector3 currentPos = transform.position;
+        AudioManager.Instance?.Play("cardWoosh");
         while(_timer < animationDuration)
         {
             float lerpRatio = _timer / animationDuration;
@@ -80,8 +85,6 @@ public class CardHolderAnimation : MonoBehaviour
         }
         ResetPositionAnimated();
     }
-
-
 
     private void ResetPositionAnimated(){
         GetComponent<SpriteRenderer>().sprite = transparentSprite;

@@ -12,12 +12,24 @@ public class CharacterSelectUI : MonoBehaviour
     private void Awake()
     {
         mainMenuButton.onClick.AddListener(() => {
-            NetworkManager.Singleton.Shutdown();
-            Loader.Load(Loader.Scene.InitializeScene);
+            LeaveGame();
         });
 
         readyButton.onClick.AddListener(() => {
-            CharacterSelectReady.Instance.SetPlayerReady();
+           GetReady();
         });
+    }
+
+    private void LeaveGame()
+    {
+        AudioManager.Instance?.Play("UIClick");
+        NetworkManager.Singleton.Shutdown();
+        Loader.Load(Loader.Scene.InitializeScene);
+    }
+
+    private void GetReady()
+    {
+        AudioManager.Instance?.Play("UIClick");
+        CharacterSelectReady.Instance.SetPlayerReady();
     }
 }

@@ -12,16 +12,21 @@ public class GameEndedUI : MonoBehaviour
     
     private void Awake()
     {
-
         playAgainBtn.onClick.AddListener(() => {
-            NetworkManager.Singleton.Shutdown();
-            Loader.Load(Loader.Scene.InitializeScene);
+            PlayAgain();
         });
     }
 
     private void Start()
     {
         MantisGameMultiplayer.Instance.OnGameEnded += MantisGameMultiplayer_OnGameEnded;
+    }
+
+    private void PlayAgain()
+    {
+        AudioManager.Instance?.Play("UIClick");
+        NetworkManager.Singleton.Shutdown();
+        Loader.Load(Loader.Scene.InitializeScene);
     }
 
     private void MantisGameMultiplayer_OnGameEnded(object sender, MantisGameMultiplayer.PlayerWinnerArgs args)
@@ -31,7 +36,10 @@ public class GameEndedUI : MonoBehaviour
             winnerUsernameTxt.text = "Fin de la partie : manque de joueurs.";
         } else {
             if(args.winnerPlayerId == NetworkManager.Singleton.LocalClientId)
+            {
                 winnerUsernameTxt.text = "Vous avez gagné la partie !";
+                AudioManager.Instance?.Play("winGame");
+            }
             else
                 winnerUsernameTxt.text = args.winnerUsername + " a gagné la partie !";
         }

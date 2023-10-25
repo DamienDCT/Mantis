@@ -23,28 +23,39 @@ public class MainMenuUI : MonoBehaviour
     private void Awake()
     {
         hostGameBtn.onClick.AddListener(() => {
+            PlayUISound();
             NetworkManagerUI.Instance?.CreateRelay();
         });
 
         connexionJoinGameBtn.onClick.AddListener(() => {
+            PlayUISound();
             NetworkManagerUI.Instance?.JoinRelay();
         });
 
         quitBtn.onClick.AddListener(() => {
+            PlayUISound();
             Application.Quit();
         });
 
         createMenuGameBtn.onClick.AddListener(() => {
+            PlayUISound();
             GoToCreateMenu();
         });
 
         backMenuBtn.onClick.AddListener(() => {
+            PlayUISound();
             GoToMainMenu();
         });
 
         joinGameBtn.onClick.AddListener(() => {
+            PlayUISound();
             GoToJoinMenu();
         });
+    }
+
+    public void PlayUISound()
+    {
+        AudioManager.Instance.Play("UIClick");
     }
 
     public void ChangeClientCode(string textFieldCode)

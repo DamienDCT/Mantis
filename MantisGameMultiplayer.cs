@@ -149,7 +149,10 @@ public class MantisGameMultiplayer : NetworkBehaviour
     private void DisplayInformationScoreClientRpc(ulong playerId, int score)
     {
         if(playerId == NetworkManager.Singleton.LocalClientId)
-            InformationDisplay.Instance?.DisplayInformation("Vous avez marqué " + score + "points");
+        {
+            InformationDisplay.Instance?.DisplayInformation("Vous avez marqué " + score + " points");
+            AudioManager.Instance?.Play("earnPoints");
+        }
         else
             InformationDisplay.Instance?.DisplayInformation(NetworkManagerUI.Instance.GetUsernameByClientId(playerId) + " a marqué " + score + " points");
     }
