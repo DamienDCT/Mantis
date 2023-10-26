@@ -27,6 +27,8 @@ public class HostDisconnectedUI : MonoBehaviour
     private void PlayAgain()
     {
         AudioManager.Instance?.Play("UIClick");
+        AudioManager.Instance?.Stop("backgroundMusic");
+        AudioManager.Instance?.PlayLoop("backgroundMenuMusic");
         NetworkManager.Singleton.Shutdown();
         Loader.Load(Loader.Scene.InitializeScene);
     }

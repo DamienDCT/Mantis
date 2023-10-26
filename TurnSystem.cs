@@ -59,6 +59,7 @@ public class TurnSystem : NetworkBehaviour
         ulong clientId = playerData.clientId;
         if(clientId == NetworkManager.Singleton.LocalClientId)
         {
+            AudioManager.Instance?.Play("playersTurn");
             InformationDisplay.Instance?.DisplayInformation("A vous de jouer !");
         } else {
             InformationDisplay.Instance?.DisplayInformation("Au tour de " + playerData.username);

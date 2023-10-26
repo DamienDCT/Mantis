@@ -41,6 +41,7 @@ public class MantisGameMultiplayer : NetworkBehaviour
 
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectedCallback;
     }
+    
 
     private void NetworkManager_OnClientDisconnectedCallback(ulong playerId)
     {
@@ -75,6 +76,8 @@ public class MantisGameMultiplayer : NetworkBehaviour
 
     private void Start()
     {
+        AudioManager.Instance?.Stop("backgroundMenuMusic");
+        AudioManager.Instance?.PlayLoop("backgroundMusic");
         if(IsHost)
         {
             SpawnPlayersServerRpc();

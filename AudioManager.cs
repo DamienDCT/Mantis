@@ -60,14 +60,16 @@ public class AudioManager : NetworkBehaviour
 
 
     // Pour jouer un son, on le recherche par son nom et on le lance s'il existe
-    public void Play(string name){
+    public void Play(string name)
+    {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if(s == null) return;
         s.source.Play();
     }
 
     // Pour jouer un son en boucle, on le recherche par son nom et on le lance s'il existe et qu'il est pas déjà lancé
-    public void PlayLoop(string name){
+    public void PlayLoop(string name)
+    {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if(s == null) return;
         if(s.isPlaying){
@@ -79,7 +81,8 @@ public class AudioManager : NetworkBehaviour
 
 
     // Pour arrêter un son, on le recherche par son nom et on le stop s'il existe et qu'il est déjà lancé
-    public void Stop(string name){
+    public void Stop(string name)
+    {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if(s == null) return;
         if(s.isPlaying)

@@ -21,9 +21,17 @@ public class PauseGameUI : MonoBehaviour
         });
 
         goBackMenuBtn.onClick.AddListener(() => {
-            NetworkManager.Singleton.Shutdown();
-            Loader.Load(Loader.Scene.InitializeScene);
+            QuitGame();
         });
+    }
+
+    private void QuitGame()
+    {
+        AudioManager.Instance?.Play("UIClick");
+        AudioManager.Instance?.Stop("backgroundMusic");
+        AudioManager.Instance?.PlayLoop("backgroundMenuMusic");
+        NetworkManager.Singleton.Shutdown();
+        Loader.Load(Loader.Scene.InitializeScene);
     }
 
     private void Update()
@@ -48,6 +56,7 @@ public class PauseGameUI : MonoBehaviour
 
     private void Pause()
     {
+        AudioManager.Instance?.Play("UIClick");
         pauseMenuPanel.gameObject.SetActive(true);
         isGamePausedLocally = true;
         DisableButtons();
@@ -55,6 +64,7 @@ public class PauseGameUI : MonoBehaviour
 
     private void Unpause()
     {
+        AudioManager.Instance?.Play("UIClick");
         pauseMenuPanel.gameObject.SetActive(false);
         isGamePausedLocally = false;
         EnableButtons();
